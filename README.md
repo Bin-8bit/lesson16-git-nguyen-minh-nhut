@@ -71,3 +71,28 @@ Secret cần khai báo trong Settings → Secrets and variables → Actions:
 | `VM_SSH_KEY` | private key dành riêng cho GitHub Actions |
 
 `.env` và `secrets/gcp-sa.json` không bao giờ lên GitHub, tạo tay trên VM một lần.
+
+## Module mới: `dags/utils/string_utils.py`
+
+Tiện ích xử lý chuỗi tiếng Việt.
+
+**Hàm chính:** `to_slug(text: str) -> str`: bỏ dấu tiếng Việt, chuyển chữ thường, nối các từ bằng `-`.
+
+| Input | Output mong đợi |
+|---|---|
+| `"Nguyễn Minh Nhựt"` | `"nguyen-minh-nhut"` |
+| `"Đặng Thị Ánh"` | `"dang-thi-anh"` |
+| `"Lesson 16: Git & GitHub"` | `"lesson-16-git-github"` |
+| `123` (không phải chuỗi) | báo lỗi `TypeError` |
+
+**Chạy nhanh:**
+
+```bash
+python3 dags/utils/string_utils.py
+```
+
+**Chạy test:**
+
+```bash
+python3 -m pytest tests/unit/test_string_utils.py -v
+```
